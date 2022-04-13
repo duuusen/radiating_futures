@@ -4,6 +4,8 @@
   }
 body {
     background-color: #24393b;
+    background: url('img/bg2.jpg') center repeat;
+    background-size: 100%;
     margin: 20px;
     height: 7500px;
     font-family: nucleus, Helvetica, Arial, sans-serif;
@@ -12,13 +14,13 @@ body {
 
 .intro {
     position: fixed;
-    width: 90vw;
+    width: 80vw;
     text-align: justify;
 }
 
 h1 {
     margin: 0px;
-    font-size: 3.5vw;
+    font-size: 3vw;
     animation: glowblue 6s ease-in-out infinite;
 }
 
@@ -38,7 +40,7 @@ h1 {
 .timeline_element {
     position: absolute;
     right: 10px;
-    font-size: 25px;
+    font-size: 3.5vw;
     font-weight: bold;
     margin-top: 50vh;
 }
