@@ -27,6 +27,16 @@
       <img class="poster poster_7" src="img/movie_posters/2021.jpg">
     </div>
     <div id="movies"></div>
+    <div id="text">
+      <div class="textElement text-1">1945: America dropping the bombs “Little Boy” and “Fat Man” on the Japanese cities of Hiroshima and Nagasaki in WWII with devastating effects on the residents of the region. The goal was to get Japan to surrender, which was successful.</div>
+      <div class="textElement text-2">1957: The British nuclear reactor of Windscale, purposed to produce plutonium for atomic bombs, had a fire, which lead to radiation being spread through the UK and Europe.</div>
+      <div class="textElement text-3">1968: The treaty of Non-Proliferation of nuclear weapons (NPT) was signed. It’s purpose is to prevent the spread of nuclear weapons and their technology, and to achieve complete nuclear disarmament.</div>
+      <div class="textElement text-4">1986: The core of the soviet nuclear reactor Chernobyl melted, which lead to several explosions and fires. This released huge amounts of radiation into the air which spread all over Europe. It is called one of the worst civilian nuclear accidents, second only to Fukushima.</div>
+      <div class="textElement text-5">1991: A treaty signed by the US and the Soviet Union, which barred both parties of deploying nuclear weapons.</div>
+      <div class="textElement text-6">2007: The uranium prices exploded following China building multiple new nuclear reactors.</div>
+      <div class="textElement text-7">2011: In 2011, an earthquake happened in Japan, which triggered a tsunami, which in turn lead to several meltdowns and explosions in the nuclear reactor of Fukushima. This was the worst civilian nuclear disaster.</div>
+      <div class="textElement text-8">2022: this year, everything can happen …</div>
+    </div>
   
     <script>
 
@@ -82,7 +92,7 @@
         .addTo(controller);
       }
 
-      var years = [1957, 1968, 1986, 1991, 2007, 2011, 2021]
+      var years = [1957, 1968, 1986, 1991, 2007, 2011, 2022]
       for(var i=1; i <= 7; i++){
         new ScrollMagic.Scene({
           duration: 1000000, // hide 10% before exiting view (80% + 10% from bottom)
