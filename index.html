@@ -18,19 +18,35 @@
     <div id="globeViz"></div>
     <div id="timeline"></div>
     <div id="posters">
-      <img class="poster_1" src="img/movie_posters/1957.jpg">
-      <img class="poster_2"src="img/movie_posters/1968.jpg">
-      <img class="poster_3"src="img/movie_posters/1986.jpg">
-      <img class="poster_4"src="img/movie_posters/1991.jpg">
-      <img class="poster_5"src="img/movie_posters/2007.jpg">
-      <img class="poster_6"src="img/movie_posters/2011.jpg">
-      <img class="poster_7"src="img/movie_posters/2021.jpg">
+      <img class="poster poster_1" src="img/movie_posters/1957.jpg">
+      <img class="poster poster_2" src="img/movie_posters/1968.jpg">
+      <img class="poster poster_3" src="img/movie_posters/1986.jpg">
+      <img class="poster poster_4" src="img/movie_posters/1991.jpg">
+      <img class="poster poster_5" src="img/movie_posters/2007.jpg">
+      <img class="poster poster_6" src="img/movie_posters/2011.jpg">
+      <img class="poster poster_7" src="img/movie_posters/2021.jpg">
     </div>
     <div id="movies"></div>
   
     <script>
 
       const world = Globe()
+
+      // position posters random
+      var posterPosition = document.getElementsByClassName('poster');
+      function position() {
+        for (var i = 0; i < posterPosition.length; i++ ) {
+          //give poster a random position
+          var posx = (Math.random() * (window.innerWidth - 200)).toFixed();
+          var posy = (Math.random() * (window.innerHeight - 200)).toFixed();
+
+          //apply position to circle
+          posterPosition[i].style.left = posx + 'px';
+          posterPosition[i].style.top = posy + 'px';
+
+        } 
+      } 
+      position();//end function position
 
       // init controller
       var controller = new ScrollMagic.Controller();
@@ -63,6 +79,16 @@
           offset: 500 * (i+1) // move trigger to center of element
         })
         .setClassToggle(".element_" + i, "visible") // add class to reveal
+        .addTo(controller);
+      }
+
+      var years = [1957, 1968, 1986, 1991, 2007, 2011, 2021]
+      for(var i=1; i <= 7; i++){
+        new ScrollMagic.Scene({
+          duration: 1000000, // hide 10% before exiting view (80% + 10% from bottom)
+          offset: 100 * (years[i-1] - 1945) // move trigger to center of element
+        })
+        .setClassToggle(".poster_" + i, "displayed") // add class to reveal
         .addTo(controller);
       }
 
