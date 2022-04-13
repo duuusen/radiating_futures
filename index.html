@@ -105,6 +105,7 @@
       let x = 0
       let y = 0
       let scroll = 0
+      let happines = 0
 
       function mousemove(event){
           x = event.clientX
@@ -119,7 +120,33 @@
       }
 
       window.addEventListener("scroll", function(event) {
-        scroll = Math.trunc(convertRange(this.scrollY, [0, 10000],[1945, 2040]))
+        scroll = Math.trunc(convertRange(this.scrollY, [0, 8000],[1945, 2025]));
+        var year = 0;
+        if (scroll < 1957) {
+          year = 1945;
+        } else if (scroll < 1968) {
+          year = 1957;
+        } else if (scroll < 1986) {
+          year = 1968;
+        } else if (scroll < 1991) {
+          year = 1986;
+        } else if (scroll < 2007) {
+          year = 1991;
+        } else if (scroll < 2011) {
+          year = 2007;
+        } else if (scroll < 2022) {
+          year = 2011;
+        } else {
+          year = 2022;
+        }
+        world.polygonCapColor((d) => {
+            var name = happines.filter(e => e.Country === d.properties.ADMIN);
+            if (name.length !== 0) {
+              // console.log(name[0][2022])
+              return colorScale(name[0][year])
+            }
+            return 'rgba(255,255,255,1)'
+          })
       });
 
       (function frameTicker() {
@@ -134,9 +161,15 @@
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
 
+      fetch('data/happines.json').then(res => res.json()).then(data => {
+        happines = data;
+        // console.log(data) 
+      });
+
       // window.addEventListener('mousemove', mousemove);
 
-      const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
+      const colorScale = d3.scaleSequentialSqrt(d3.interpolateCividis);
+      colorScale.domain([4, 8]);
   
       // GDP per capita (avoiding countries with small pop)
       const getVal = feat => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
@@ -144,7 +177,9 @@
       fetch('data/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(countries =>
       {
         const maxVal = Math.max(...countries.features.map(getVal));
-        colorScale.domain([0, maxVal]);
+        // colorScale.domain([0, maxVal]);
+
+        console.log(countries.features.filter(d => d.properties.ADMIN == 'United States of America'))
 
         const mat_basic = new THREE.MeshPhongMaterial({
           color: 0xFFFFFF,    // red (can also use a CSS color string here)
@@ -169,14 +204,12 @@
           .polygonAltitude(0.01)
           // .polygonCapColor(feat => colorScale(getVal(feat)))
           // .polygonCapColor(() => 'rgba(255, 255, 255, 1)')
-          .polygonCapColor('white')
+          .polygonCapColor(() => 'rgba(255, 255, 255, 1)')
           .polygonSideColor(() => 'rgba(0, 0, 0, 0)')
           .polygonStrokeColor(() => '#111')
-          // .polygonLabel(({ properties: d }) => `
-          //   <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
-          //   GDP: <i>${d.GDP_MD_EST}</i> M$<br/>
-          //   Population: <i>${d.POP_EST}</i>
-          // `)
+          .polygonLabel(({ properties: d }) => `
+            ${d.ADMIN}
+          `)
           .pointLat(d => d.latitude)
           .pointLng(d => d.longitude)
           .pointColor(() => 'rgba(255, 0, 0, 1)')
@@ -186,7 +219,7 @@
           .pointsTransitionDuration(200)
           .onPolygonHover(hoverD => world
             .polygonAltitude(d => d === hoverD ? 0.01 : 0.01)
-            .polygonCapColor(d => d === hoverD ? 'gray' : 'white')
+            // .polygonCapColor(d => d === hoverD ? 'gray' : 'white')
             // .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
           )
           .polygonsTransitionDuration(200)
