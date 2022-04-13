@@ -1,15 +1,72 @@
 <head>
-    <style> body { margin: 0; } </style>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
   
     <script src="script/d3.min"></script>
+
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
   
     <script src="script/globe.gl.min"></script>
     <!--<script src="../../dist/globe.gl.js"></script>-->
   </head>
   <body>
+    <div class="intro">
+      <h1>
+        Hiroshima, Chernobyl and fukushima, Share the sake of Nagasaki. The rice, the wine, the death all devine. Atomic excitation, displacing you fine. Broken into components of decaying energy. Death will spread, tears, turns head. Uranium and Uranus, You and Yourself, Fray for silent death.
+      </h1>
+    </div>
     <div id="globeViz"></div>
+    <div id="timeline"></div>
   
     <script>
+
+      const world = Globe()
+
+      // init controller
+      var controller = new ScrollMagic.Controller();
+
+      var toAdd = document.createDocumentFragment();
+      for(var i=0; i <= 80; i+=10){
+        var newDiv = document.createElement('div');
+        newDiv.className = 'timeline_element';
+        newDiv.style.top = i * 100 + 'px';
+        newDiv.innerText = 1945 + i;
+        toAdd.appendChild(newDiv);
+      }
+
+      document.getElementById('timeline').appendChild(toAdd);
+
+      let x = 0
+      let y = 0
+      let scroll = 0
+
+      function mousemove(event){
+          x = event.clientX
+          y = event.clientY
+          world.pointColor(() => 'rgba(' +
+            convertRange(y, [0, screen.height],[0, 255]) + ' , ' + 
+            convertRange(x, [0, screen.width],[0, 255]) + ', 0, 1)')
+          // console.log("pageX: ",event.pageX, 
+          // "pageY: ", event.pageY, 
+          // "clientX: ", event.clientX, 
+          // "clientY:", event.clientY)
+      }
+
+      window.addEventListener("scroll", function(event) {
+        let new_scroll = Math.trunc(convertRange(this.scrollY, [0, 10000],[1945, 2040]))
+        if (scroll != new_scroll) {
+          scroll = new_scroll
+          world.pointAltitude(d => d.year < scroll ? (Math.log((d.yield_lower + d.yield_upper) / 2) / 50) : 0)
+        }
+        // console.log(scroll);
+      });
+
+      function convertRange( value, r1, r2 ) { 
+        return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+      }
+
+      // window.addEventListener('mousemove', mousemove);
+
       const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
   
       // GDP per capita (avoiding countries with small pop)
@@ -19,27 +76,61 @@
       {
         const maxVal = Math.max(...countries.features.map(getVal));
         colorScale.domain([0, maxVal]);
+
+        const mat_basic = new THREE.MeshPhongMaterial({
+          color: 0xFFFFFF,    // red (can also use a CSS color string here)
+          flatShading: false,
+        });
+        const mat_hover = new THREE.MeshPhongMaterial({
+          color: 0xFF0000,    // red (can also use a CSS color string here)
+          flatShading: false,
+          emissive: 0xFF0000
+        });
   
-        const world = Globe()
+        world
+          // .showGlobe(false)
+          .width(window.innerWidth * 0.75)
+          .height(window.innerWidth * 0.75)
+          .backgroundColor('rgba(0, 0, 0, 0)')
+          .showAtmosphere(false)
           .globeImageUrl('img/earth-night.jpg')
-          .backgroundImageUrl('img/night-sky.png')
+          // .backgroundImageUrl('img/night-sky.png')
           .lineHoverPrecision(0)
           .polygonsData(countries.features.filter(d => d.properties.ISO_A2 !== 'AQ'))
-          .polygonAltitude(0.06)
-          .polygonCapColor(feat => colorScale(getVal(feat)))
-          .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
+          .polygonAltitude(0.01)
+          // .polygonCapColor(feat => colorScale(getVal(feat)))
+          // .polygonCapColor(() => 'rgba(255, 255, 255, 1)')
+          .polygonCapColor('white')
+          .polygonSideColor(() => 'rgba(0, 0, 0, 0)')
           .polygonStrokeColor(() => '#111')
-          .polygonLabel(({ properties: d }) => `
-            <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
-            GDP: <i>${d.GDP_MD_EST}</i> M$<br/>
-            Population: <i>${d.POP_EST}</i>
-          `)
+          // .polygonLabel(({ properties: d }) => `
+          //   <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
+          //   GDP: <i>${d.GDP_MD_EST}</i> M$<br/>
+          //   Population: <i>${d.POP_EST}</i>
+          // `)
+          .pointLat(d => d.latitude)
+          .pointLng(d => d.longitude)
+          .pointColor(() => 'rgba(255, 0, 0, 1)')
+          .pointLabel('name')
+          .pointRadius(0.5)
+          .pointAltitude(d => d.year < scroll ? (Math.log((d.yield_lower + d.yield_upper) / 2) / 50) : 0)
+          .pointsTransitionDuration(200)
           .onPolygonHover(hoverD => world
-            .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
-            .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
+            .polygonAltitude(d => d === hoverD ? 0.01 : 0.01)
+            .polygonCapColor(d => d === hoverD ? 'gray' : 'white')
+            // .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
           )
-          .polygonsTransitionDuration(300)
+          .polygonsTransitionDuration(200)
         (document.getElementById('globeViz'))
+
+        fetch('data/nuke_test.json').then(res => res.json()).then(data => {
+          world.pointsData(data);
+        });
+
+        world.controls().autoRotate = true;
+        world.controls().enableZoom = false;
+        world.controls().autoRotateSpeed = 0.5;
       });
+
     </script>
   </body>

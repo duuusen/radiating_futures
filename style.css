@@ -1,0 +1,33 @@
+body {
+    margin: 10px;
+    height: 10000px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.intro {
+    position: fixed;
+    width: calc(100vw - 20px);
+}
+
+h1 {
+    margin: 0px;
+}
+
+#globeViz {
+    position: fixed;
+    top: calc(50vh - 75vw/2);
+    left: calc(12.5vw)
+}
+
+#timeline {
+    position: absolute;
+    margin-top: 50vh;
+    right: 0px;
+    top: 0px;
+}
+.timeline_element {
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
