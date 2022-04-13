@@ -38,6 +38,7 @@ h1 {
     top: 0px;
 }
 .timeline_element {
+    color: #de0707;
     position: absolute;
     right: 10px;
     font-size: 3.5vw;
@@ -47,7 +48,6 @@ h1 {
 .timeline_element:last-child {
     height: 50vh;
 }
-
 #movies {
     position: fixed;
     display: flex;
@@ -65,7 +65,16 @@ h1 {
     background: red;
     animation: glowgred 2s ease-in-out infinite;
 }
-
+#text {
+    max-width: 40vw;
+    margin: 0 auto;
+    
+}
+.textElement {
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+    z-index: 100000000;
+}
 .visible {
     opacity: 1;
 }
