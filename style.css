@@ -1,17 +1,25 @@
+@font-face {
+    font-family: nucleus;
+    src: url(font/nucleus.otf);
+  }
 body {
-    margin: 10px;
+    background-color: #24393b;
+    margin: 20px;
     height: 7500px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: nucleus, Helvetica, Arial, sans-serif;
+    color: #6ae0ed;
 }
 
 .intro {
     position: fixed;
-    width: calc(100vw - 20px);
+    width: 90vw;
     text-align: justify;
 }
 
 h1 {
     margin: 0px;
+    font-size: 3.5vw;
+    animation: glowblue 6s ease-in-out infinite;
 }
 
 #globeViz {
@@ -52,8 +60,29 @@ h1 {
     width: calc(100vw / 20);
     opacity: 0;
     background: red;
+    animation: glowgred 2s ease-in-out infinite;
 }
 
 .visible {
     opacity: 1;
 }
+@keyframes glowblue {
+    from {
+        text-shadow: 0 0 5px #2d9da9;
+    }
+    90% {
+        text-shadow: 0 0 30px #99ebf4;
+    }
+    to {
+        text-shadow: 0 0 5px #2d9da9;
+      /* text-shadow: 0 0 30px #99ebf4, 0 0 5px #2d9da9; */
+    }
+  }
+@keyframes glowred {
+   from {
+      box-shadow: 2px 2px 20px #de0707;
+    }
+    to {
+      box-shadow: 2px 2px 30px #00d60e, 2px 2px 5px #079d39;
+    }
+  }
