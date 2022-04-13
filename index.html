@@ -12,11 +12,21 @@
   <body>
     <div class="intro">
       <h1>
-        Hiroshima, Chernobyl and fukushima, Share the sake of Nagasaki. The rice, the wine, the death all devine. Atomic excitation, displacing you fine. Broken into components of decaying energy. Death will spread, tears, turns head. Uranium and Uranus, You and Yourself, Fray for silent death.
+        We knew the world would not be the same. Few people laughed. Few people cried. Most people were silent. I remembered the line from the Hindu scripture, the Bhagavad Gita. Vishnu is trying to persuade the prince that he should do his duty, and to impress him, takes on his multi-armed form and says, "Now I am become Death, the destroyer of worlds." I suppose we all thought that, one way or another.
       </h1>
     </div>
     <div id="globeViz"></div>
     <div id="timeline"></div>
+    <div id="posters">
+      <img class="poster_1" src="img/movie_posters/1957.jpg">
+      <img class="poster_2"src="img/movie_posters/1968.jpg">
+      <img class="poster_3"src="img/movie_posters/1986.jpg">
+      <img class="poster_4"src="img/movie_posters/1991.jpg">
+      <img class="poster_5"src="img/movie_posters/2007.jpg">
+      <img class="poster_6"src="img/movie_posters/2011.jpg">
+      <img class="poster_7"src="img/movie_posters/2021.jpg">
+    </div>
+    <div id="movies"></div>
   
     <script>
 
@@ -33,8 +43,28 @@
         newDiv.innerText = 1945 + i;
         toAdd.appendChild(newDiv);
       }
-
       document.getElementById('timeline').appendChild(toAdd);
+
+      var movie_data = [3.2, 5.3, 4.6, 4.05, 5.6, 3.7, 3.4, 4.6, 4.5, 4.5, 5.8, 5.3, 5.1, 6.3, 7.6];
+
+      var toMovies = document.createDocumentFragment();
+      for(var i=0; i < 15; i+=1){
+        var newDiv = document.createElement('div');
+        newDiv.classList.add("movie_element");
+        newDiv.classList.add("element_" + i);
+        newDiv.style.height = (movie_data[i] - 2) * 50 + 'px';
+        toMovies.appendChild(newDiv);
+      }
+      document.getElementById('movies').appendChild(toMovies);
+
+      for(var i=0; i < 15; i+=1){
+        new ScrollMagic.Scene({
+          duration: 1000000, // hide 10% before exiting view (80% + 10% from bottom)
+          offset: 500 * (i+1) // move trigger to center of element
+        })
+        .setClassToggle(".element_" + i, "visible") // add class to reveal
+        .addTo(controller);
+      }
 
       let x = 0
       let y = 0

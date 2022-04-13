@@ -1,12 +1,13 @@
 body {
     margin: 10px;
-    height: 10000px;
+    height: 7500px;
     font-family: Helvetica, Arial, sans-serif;
 }
 
 .intro {
     position: fixed;
     width: calc(100vw - 20px);
+    text-align: justify;
 }
 
 h1 {
@@ -14,14 +15,15 @@ h1 {
 }
 
 #globeViz {
+    z-index: 99999999;
     position: fixed;
     top: calc(50vh - 75vw/2);
     left: calc(12.5vw)
 }
 
 #timeline {
+    z-index: 9999999999;
     position: absolute;
-    margin-top: 50vh;
     right: 0px;
     top: 0px;
 }
@@ -30,4 +32,28 @@ h1 {
     right: 10px;
     font-size: 25px;
     font-weight: bold;
+}
+.timeline_element:last-child {
+    height: 50vh;
+}
+
+#movies {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: calc(100vw);
+    left: 0;
+    bottom: 0;
+}
+.movie_element {
+    position: relative;
+    width: calc(100vw / 20);
+    opacity: 0;
+    background: red;
+}
+
+.visible {
+    opacity: 1;
 }
