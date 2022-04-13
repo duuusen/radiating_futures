@@ -4,7 +4,7 @@
 <p align="center">Aurelian Ammon, Lisa Cuthbertson, Jihyun Kim, Duy Bui</p>
 
 <p align="center">
-<img src="https://github.com/duuusen/radiating_futures/img/rf.png" width="400">
+<img src="https://raw.githubusercontent.com/duuusen/radiating_futures/main/img/rf.png" width="400">
 </p>
 
 Practice
