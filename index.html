@@ -53,13 +53,16 @@
       }
 
       window.addEventListener("scroll", function(event) {
-        let new_scroll = Math.trunc(convertRange(this.scrollY, [0, 10000],[1945, 2040]))
-        if (scroll != new_scroll) {
-          scroll = new_scroll
-          world.pointAltitude(d => d.year < scroll ? (Math.log((d.yield_lower + d.yield_upper) / 2) / 50) : 0)
-        }
-        // console.log(scroll);
+        scroll = Math.trunc(convertRange(this.scrollY, [0, 10000],[1945, 2040]))
       });
+
+      (function frameTicker() {
+        requestAnimationFrame(frameTicker);
+
+        // Update
+        world.pointAltitude(d => d.year < scroll ? (Math.log((d.yield_lower + d.yield_upper) / 2) / 50) : 0)
+
+      })();
 
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
@@ -129,7 +132,7 @@
 
         world.controls().autoRotate = true;
         world.controls().enableZoom = false;
-        world.controls().autoRotateSpeed = 0.5;
+        world.controls().autoRotateSpeed = 1;
       });
 
     </script>
