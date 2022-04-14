@@ -4,22 +4,24 @@
 <p align="center">Aurelian Ammon, Lisa Cuthbertson, Jihyun Kim, Duy Bui</p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/duuusen/radiating_futures/main/img/rf.png" width="400">
+<img src="https://raw.githubusercontent.com/duuusen/radiating_futures/main/img/rf.png" width="600">
 </p>
 
-Practice
-a deep, warm flowing
-give and take
-of the radiation
-to the exclusion
-of all"
-is a dharma
-which has been growing
-inside of me
-for a few days
-that I am ready
-to file away
-so I am giving
-it to you
-in the hope
-that it helps.
+Practice<br/>
+a deep, warm flowing<br/>
+give and take<br/>
+of the radiation<br/>
+to the exclusion<br/>
+of all"<br/>
+is a dharma<br/>
+which has been growing<br/>
+inside of me<br/>
+for a few days<br/>
+that I am ready<br/>
+to file away<br/>
+so I am giving<br/>
+it to you<br/>
+in the hope<br/>
+that it helps.<br/>
+
+— Kongsaeng Chris Everson
