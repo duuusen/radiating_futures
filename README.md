@@ -12,7 +12,7 @@ a deep, warm flowing<br/>
 give and take<br/>
 of the radiation<br/>
 to the exclusion<br/>
-of all"<br/>
+of all<br/>
 is a dharma<br/>
 which has been growing<br/>
 inside of me<br/>
