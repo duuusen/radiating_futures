@@ -27,8 +27,8 @@ h1 {
 #globeViz {
     z-index: 99999999;
     position: fixed;
-    top: calc(50vh - 75vw/2);
-    left: calc(12.5vw)
+    top: calc(50vh - 33vw);
+    left: calc(33vw / 2)
 }
 
 #timeline {
