@@ -9,7 +9,8 @@
 
 If the radiance of a thousand suns<br/>
 were to burst at once into the sky<br/>
-that would be like<br/>
-the splendor of the Mighty One and I am become Death, the shatterer of worlds.
+that would be like the splendor of the Mighty One<br/>
+and I am become Death<br/>
+the shatterer of worlds.
 
 — J. Robert Oppenheimer
