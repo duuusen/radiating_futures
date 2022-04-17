@@ -7,21 +7,9 @@
 <img src="https://raw.githubusercontent.com/duuusen/radiating_futures/main/img/rf.png" width="800">
 </p>
 
-Practice<br/>
-a deep, warm flowing<br/>
-give and take<br/>
-of the radiation<br/>
-to the exclusion<br/>
-of all<br/>
-is a dharma<br/>
-which has been growing<br/>
-inside of me<br/>
-for a few days<br/>
-that I am ready<br/>
-to file away<br/>
-so I am giving<br/>
-it to you<br/>
-in the hope<br/>
-that it helps.<br/>
+If the radiance of a thousand suns<br/>
+were to burst at once into the sky<br/>
+that would be like<br/>
+the splendor of the Mighty One and I am become Death, the shatterer of worlds.
 
-— Kongsaeng Chris Everson
+— J. Robert Oppenheimer
